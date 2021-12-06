@@ -103,6 +103,6 @@ function resultado(response) {
     let userJson = JSON.stringify(user);
     sessionStorage.setItem("user", userJson);
 
-    window.location.href = "index1.html";
+    window.location.href = "index.html";
 }
 }
