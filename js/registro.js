@@ -30,22 +30,17 @@ $(document).ready(function () {
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
-          
+
+          let $select2 = $("#publico");
+          let $select = $("#privado");
+
         for(i=0;i<respuesta.length;i++){
             if(respuesta[i].tipo == "privado"){
                 let $select = $("#privado");
-                 $.each(respuesta, function (idTransporte, tipo) {
-                $select.append('<option value='+tipo.idTransporte+'>'+tipo.empresa+'</option>');
-            
-            }); 
+                $select.append('<option value='+respuesta[i].idTransporte+'>'+respuesta[i].empresa+'</option>');
             }else if(respuesta[i].tipo == "publico"){
-
-                    let $select = $("#publico");
-                    $.each(respuesta, function (respuesta, tipo) {
-                        $select.append('<option value='+tipo.idTransporte+'>'+tipo.empresa+'</option>');
-            });
-        }
-            
+                $select2.append('<option value='+respuesta[i].idTransporte+'>'+respuesta[i].empresa+'</option>')
+        } 
         }
     }
 
@@ -60,14 +55,14 @@ function inicioCiudades(){
         datatype:"JSON",
         success:function(respuesta){
           
-        for(i=0;i<respuesta.length;i++){
+        //for(i=0;i<respuesta.length;i++){
                 let $select = $("#Ciudad");
                 $.each(respuesta, function (idCiudad, ciudad) {
-                $select.append('<option value='+ciudad.idCiudad+'>'+ciudad.ciudad+'</option>');
+                $select.append('<option value='+ ciudad.idCiudad +'>'+ciudad.ciudad+'</option>');
             
             }); 
             
-        }
+        //}
     }
 
     })
@@ -85,8 +80,8 @@ function inicioCiudades(){
       email: $("#Email").val(),
       contrasena: $("#Contrasena").val(),
       role: "USUARIO",
-      ciudad: {idCiudad:$("#Ciudad").val()},
-      tipoTransporte: {idTransporte:$("#TipoTransporte").val()},
+      ciudad: {"idCiudad":$("#Ciudad").val()},
+      tipoTransporte: {"idTransporte":$("#privado").val()},
     };
   
     if (validar()) {
@@ -101,7 +96,7 @@ function inicioCiudades(){
         success: function (response) {
           console.log(response);
           $("#mensajes").html(
-            '<div class="alert alert-success" role="alert"> Usuario registrado con exito! Ya puedes <a href="login.html">Iniciar Sesion</a></div>'
+            '<div class="alert alert-success" role="alert"> Usuario registrado con exito! Ya puedes <a href="logueo.html">Iniciar Sesion</a></div>'
           );
           $("#mensajes").show(300);
           limpiar();
@@ -258,7 +253,7 @@ function inicioCiudades(){
   
   function alertaUser() {
     let texto =
-      'Usuario creado con exito, ya puedes <a href="login.html" class="alert-link">Iniciar Sesion.</a>';
+      'Usuario creado con exito, ya puedes <a href="logueo.html" class="alert-link">Iniciar Sesion.</a>';
     $("#alertaUser").html(texto);
     $("#alertaUser").show();
   }
