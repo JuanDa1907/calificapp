@@ -69,50 +69,117 @@ function inicioCiudades(){
 }
      
   function newUser() {
-    let usuario = {
+
+
+    if ($("#publico").val() == ""){
       
-      documento: $("#Documento").val(),
-      nombre: $("#Nombre").val(),
-      apellido: $("#Apellido").val(),
-      edad: $("#Edad").val(),
-      genero: $("#Genero").val(),
-      telefono: $("#Telefono").val(),  
-      email: $("#Email").val(),
-      contrasena: $("#Contrasena").val(),
-      role: "USUARIO",
-      ciudad: {"idCiudad":$("#Ciudad").val()},
-      tipoTransporte: {"idTransporte":$("#privado").val()},
-    };
-  
-    if (validar()) {
-      $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        dataType: "JSON",
-        data: JSON.stringify(usuario),
-  
-        url: endpoint + "/save",
-  
-        success: function (response) {
-          console.log(response);
-          $("#mensajes").html(
-            '<div class="alert alert-success" role="alert"> Usuario registrado con exito! Ya puedes <a href="logueo.html">Iniciar Sesion</a></div>'
-          );
-          $("#mensajes").show(300);
-          limpiar();
-        },
-  
-        error: function (jqXHR, textStatus, errorThrown) {
-          $("#mensajes").html(
-            '<div class="alert alert-danger" role="alert"> Lo sentimos ha ocurrido un error!</div>'
-          );
-          $("#mensajes").show(300);
-          console.log("No Se guardo correctamente");
-        },
-      });
+      let usuario = {
+      
+        documento: $("#Documento").val(),
+        nombre: $("#Nombre").val(),
+        apellido: $("#Apellido").val(),
+        edad: $("#Edad").val(),
+        genero: $("#Genero").val(),
+        telefono: $("#Telefono").val(),  
+        email: $("#Email").val(),
+        contrasena: $("#Contrasena").val(),
+        role: "USUARIO",
+        ciudad: {"idCiudad":$("#Ciudad").val()},
+        tipoTransporte: {"idTransporte":$("#privado").val()},
+      };
+    
+      if (validar()) {
+        $.ajax({
+          type: "POST",
+          contentType: "application/json",
+          dataType: "JSON",
+          data: JSON.stringify(usuario),
+    
+          url: endpoint + "/save",
+    
+          success: function (response) {
+            console.log(response);
+            $("#mensajes").html(
+              '<div class="alert alert-success" role="alert"> Usuario registrado con exito! Ya puedes <a href="logueo.html">Iniciar Sesion</a></div>'
+            );
+            $("#mensajes").show(300);
+            limpiar();
+          },
+    
+          error: function (jqXHR, textStatus, errorThrown) {
+            $("#mensajes").html(
+              '<div class="alert alert-danger" role="alert"> El documento o correo electronico ya se encuentran registrados!!</div>'
+            );
+            $("#mensajes").show(300);
+            console.log("No Se guardo correctamente");
+          },
+        });
+      }
+      
+    }else{
+      
+      let usuario = {
+      
+        documento: $("#Documento").val(),
+        nombre: $("#Nombre").val(),
+        apellido: $("#Apellido").val(),
+        edad: $("#Edad").val(),
+        genero: $("#Genero").val(),
+        telefono: $("#Telefono").val(),  
+        email: $("#Email").val(),
+        contrasena: $("#Contrasena").val(),
+        role: "USUARIO",
+        ciudad: {"idCiudad":$("#Ciudad").val()},
+        tipoTransporte: {"idTransporte":$("#publico").val()},
+      };
+    
+      if (validar()) {
+        $.ajax({
+          type: "POST",
+          contentType: "application/json",
+          dataType: "JSON",
+          data: JSON.stringify(usuario),
+    
+          url: endpoint + "/save",
+    
+          success: function (response) {
+            console.log(response);
+            $("#mensajes").html(
+              '<div class="alert alert-success" role="alert"> Usuario registrado con exito! Ya puedes <a href="logueo.html">Iniciar Sesion</a></div>'
+            );
+            $("#mensajes").show(300);
+            limpiar();
+          },
+    
+          error: function (jqXHR, textStatus, errorThrown) {
+            $("#mensajes").html(
+              '<div class="alert alert-danger" role="alert"> El documento o correo electronico ya se encuentran registrados!</div>'
+            );
+            $("#mensajes").show(300);
+            console.log("No Se guardo correctamente");
+          },
+        });
+      }
     }
+    
+
+    
   }
   
+  function emailExiste(){
+    var email = $("#Email").val();
+    console.log(email);
+        $.ajax({
+            url:endpoint + "/emailexist/" + email,
+            type:"GET",
+            datatype:"JSON",
+            success:function(response){
+                console.log(response);
+                return response;
+            }
+        });
+    }
+
   function ValidateEmail(valor) {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return valor.match(mailformat);
@@ -203,7 +270,15 @@ function inicioCiudades(){
       $("#mensajes").focus();
       $('html, body').animate({scrollTop:0}, );
       return false;
-    } else if (validaesVacio(pass1)) {
+    } else if (emailExiste()==true) {
+      errores =
+        '<div class="alert alert-danger" role="alert"> Este correo electronico ya se encuentra registrado!</div>';
+      $("#mensajes").html(errores);
+      $("#mensajes").show(500);
+      $("#Email").focus();
+      $('html, body').animate({scrollTop:0}, );
+      return false;
+    }else if (validaesVacio(pass1)) {
       errores =
         '<div class="alert alert-danger" role="alert"> Por favor ingresa tu contraseña!</div>';
       $("#mensajes").html(errores);
