@@ -20,7 +20,7 @@ $(document).ready(function () {
 
 
   
-  var endpoint = "http://132.226.119.41:8080/api/Usuario/";
+  var endpoint = "http://132.226.119.41:8080/api/Usuario";
   
   
   function inicioTransportes(){
@@ -264,14 +264,17 @@ function inicioCiudades(){
   }
   
   function limpiar() {
-    $("#Name").val(""),
-      $("#Email").val(""),
-      $("#Password").val(""),
-      $("#Password2").val("");
-    $("#Identification").val("");
-    $("#Adress").val("");
-    $("#Phone").val("");
-    $("#Zone").val("");
-    $("#Type").val("");
+    $("#Documento").val(""),
+      $("#Nombre").val(""),
+      $("#Apellido").val(""),
+      $("#Edad").val("");
+    $("#Genero").val("");
+    $("#Telefono").val("");
+    $("#Email").val("");
+    $("#Contrasena").val("");
+    $("#Contrasena2").val("");
+    $("Ciudad").val("");
+    $("#Tipotransporte").val("");
+    $("#privado").val("");
+    $("#publico").val("");
   }
-  
