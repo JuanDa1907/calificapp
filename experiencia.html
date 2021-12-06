@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    
+    <title>Registro</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <script src="js/ruta.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css/experiencia.css" rel="stylesheet" />
+  </head>
+  <body class="text-center">
+
+    
+
+    <main class="form-signin">
+      <form >
+      
+        <div class="imgcontainer text-center">
+            <img src="css/imagenes/logoblancovertical.png" alt="Avatar" >
+        </div>
+        <div id="mensajes"></div>
+        <h1 class="h3 mb-3 fw-normal">Crear Experiencia</h1>
+
+        <div class="container">
+          <span id="rateMe2"  class="empty-stars"></span>
+        </div>
+        
+        <select class="form-select" id="Ruta" disabled>
+                    
+        </select>
+
+        <div class="form-floating">
+          <input type="number" class="form-control" id="Calificacion"  placeholder="Calificacion"/>
+        <label>Calificacion</label>
+        </div>
+
+        <div class="form-floating">
+          <textarea class="form-control" id="Comentario" rows="3"></textarea>
+          <label>Comentario</label>
+        </div>
+
+        <select class="form-select" id="Usuario" disabled hidden>
+                    
+        </select>
+
+        
+
+      
+        
+        
+        
+
+        <button
+          class="w-100 btn btn-lg btn-primary mb-4 mt-4"
+          id="guardar"
+          type="button"
+          onclick="newExperiencia()"
+        >
+          Crear Ruta
+        </button>
+        <h6>
+          <a href="index1.html" class="link-success"><-- Volver</a>
+        </h6>
+        <p class="mt-5 mb-3 text-muted">&copy; Grupo 03- G15</p>
+      </form>
+    </main>
+
+  </body>
+</html>
