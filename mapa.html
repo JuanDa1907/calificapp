@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rutas</title>
+    <script src="https://polyfill.io/v3/pollyfill.min.js?features=default"></script>
+    <script defer src='http://maps.googleapis.com/maps/api/js?key=AIzaSyAMRVhDS06r8Up6h_p906QkcSBxZpm2Q3E&callback=initMap'>
+    </script>
+    <script>
+        // variables globales
+        let map;
+        let marker;
+        let watchID;
+        let geoLoc;
+
+        function initMap() {
+            const myLatLng = {lat: 4.66791837821187,  lng:-74.06263979989642}; 
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom:15,
+                center: myLatLng,
+            }); 
+            marker = new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title:"Mapa de rutas"
+            });
+            gePosition();
+        }
+        function gePosition() {
+            if(navigator.geolocation){
+                var options = {timeout:60000};
+                geoLoc = navigator.geolocation;
+                watchID = geoloc.watchPosition(showLocationOnMap, errorHandler, options);
+            }else{
+                alert("Lo sentimos, el explorador no soporta geolocalización");
+            }
+
+            
+        }
+        function showLocationOnMap(position){
+           var latitud = position.coords.latitude;
+           var longitud = position.coords.longitude;
+        console.log("Latitud: " + latitud + ", Longitud: " + longitud);    
+        marker.setPosition(myLatLng);
+        map.setCenter(myLatLng);
+        }
+
+        function errorHandler(err){
+            if(err.code ==1){
+                alert("Error, Acceso denegado");
+            }else if(err.code ==2){
+                alert("Error, posición no existe o no se encuentra")
+            }
+            
+        }
+    </script>
+
+
+    <style type="text/css">
+        #map {
+            height: 100%;
+        }
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>
+
+
+
+
+
